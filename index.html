@@ -109,6 +109,7 @@
       }
    });
     
+    //[Models]
     app.TodoList = Backbone.Collection.extend({
       model: app.Todo,
       //localStorage: new Store("backbone-swap"),
@@ -129,9 +130,9 @@
     // Views
     //--------------
     
-    // renders individual todo items list (li)
+    //#item-template
     app.TodoView = Backbone.View.extend({
-      tagName: 'tr',//'li',
+      tagName: 'tr',
       template: _.template($('#item-template').html()),
       render: function(){
         this.$el.html(this.template(this.model.toJSON()));
@@ -173,7 +174,7 @@
       }      
     });
 
-    // renders the full list of todo items calling TodoView for each one.
+    //#todoapp
     app.AppView = Backbone.View.extend({
       el: '#todoapp',
       initialize: function () {
