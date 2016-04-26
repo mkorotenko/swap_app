@@ -60,7 +60,10 @@ input[type=time]
 	width: 4em;
 	text-align: left;
 }
-
+table.view
+{
+  max-width: 30em;
+}
 @media (min-width: 370px) {
 	input[type=date]
 	{
