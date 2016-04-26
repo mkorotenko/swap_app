@@ -43,13 +43,13 @@
     <section id="main">
       <div class="bordered">
         <table class="view">
-          <thead>
+          <!--thead>
             <tr>
               <th style="text-align: center;width: 30%;">Category</th>
               <th style="text-align: center;width: 5%;">Amount</th>
               <th style="text-align: center;width: 5%;">Act</th>
             </tr>
-          </thead>
+          </thead!-->
           <tbody id="todo-list">
           </tbody>
         </table>
@@ -60,7 +60,7 @@
   <script type="text/template" id="item-template">
     <td class="tab_cell_left">
       <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-      <a href="#account/list/<%- title %>"><%- title %></a>
+      <a href="#transactions/<%- title %>"><%- title %></a>
     </td>
     <td class="tab_cell"><%- Number(amount).toFixed(2) %></td><td class="tab_cell_action">
       <div>
@@ -71,10 +71,10 @@
     </td>
   </script>  
 
-  <script type="text/template" id="item-list-template">
+  <script type="text/template" id="transaction-template">
     <td class="tab_cell_left">
       <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-      <a href="#account/list/<%- title %>"><%- title %></a>
+      <a href="#transactions/<%- title %>"><%- title %></a>
     </td>
     <td class="tab_cell"><%- Number(amount).toFixed(2) %></td><td class="tab_cell_action">
       <div>
@@ -126,6 +126,20 @@
     // instance of the Collection
     app.todoList = new app.TodoList();
     
+    app.Transaction = Backbone.Model.extend({
+      defaults: {
+        id: '',
+        date: '',
+        note: '-',
+        amount: 0
+      }
+    });
+  
+    app.TransactionList = Backbone.Collection.extend({
+      model: app.Transaction
+    });
+    
+    app.transactionList = new app.TransactionList();
     //--------------
     // Views
     //--------------
@@ -173,6 +187,19 @@
          this.model.destroy();
       }      
     });
+    
+    app.TransactionView = Backbone.View.extend({
+      tagName: 'tr',
+      template: _.template($('#transaction-template').html()),
+      render: function(){
+        this.$el.html(this.template(this.model.toJSON()));
+        return this; // enable chained calls
+      },
+      initialize: function(){
+        this.model.on('change', this.render, this);
+        this.model.on('destroy', this.remove, this); // remove: Convenience Backbone's function for removing the view from the DOM.
+      }      
+    })
 
     //#todoapp
     app.AppView = Backbone.View.extend({
@@ -181,8 +208,9 @@
         this.input = this.$('#new-todo');
         app.todoList.on('add', this.addAll, this);
         app.todoList.on('reset', this.addAll, this);
-        app.todoList.url = 'http://swap.korotenko.me/sql.php?action=list';
-        app.todoList.fetch(); // Loads list from local storage
+
+        app.transactionList.on('add', this.addAll1, this);
+        app.transactionList.on('reset', this.addAll1, this);
       },
       events: {
         'keypress #new-todo': 'createTodoOnEnter',
@@ -200,18 +228,15 @@
       },
       addAll: function(){
         this.$('#todo-list').html(''); // clean the todo list
-        // filter todo item list
-        switch(window.filter){
-          case 'pending':
-            _.each(app.todoList.remaining(), this.addOne);
-            break;
-          case 'completed':
-            _.each(app.todoList.completed(), this.addOne);
-            break;
-          default:
-            app.todoList.each(this.addOne, this);
-            break;
-        }
+        app.todoList.each(this.addOne, this);
+      },
+      addOne1: function(todo){
+        var view = new app.TransactionView({model: todo});
+        $('#todo-list').append(view.render().el);
+      },
+      addAll1: function(){
+        this.$('#todo-list').html(''); // clean the todo list
+        app.transactionList.each(this.addOne1, this);
       },
       newAttributes: function(){
         return {
@@ -223,10 +248,15 @@
     
     app.Router = Backbone.Router.extend({
       routes: {
+        '' : 'accounts',
         'filter/:search' : 'setFilter',
         'add/:category' : 'newRecord',
         'cor/:category' : 'corRecord',
-        'account/list/:category' : 'accountList'
+        'transactions/:category' : 'transactions'
+      },
+      accounts: function() {
+        app.todoList.url = 'http://swap.korotenko.me/sql.php?action=list';
+        app.todoList.fetch();
       },
       setFilter: function(params) {
         console.log('app.router.params = ' + params);
@@ -239,9 +269,10 @@
       corRecord: function(params) {
         console.log('Cor record = ' + params);
       },
-      accountList: function(category) {
-        console.log('Account list = ' + category);
-        
+      transactions: function(category) {
+        console.log('Transactions = ' + category);
+        app.transactionList.url = 'http://swap.korotenko.me/sql.php?action=transactions';
+        app.transactionList.fetch();
       }
     });
 
