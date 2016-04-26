@@ -73,8 +73,7 @@
 
   <script type="text/template" id="transaction-template">
     <td class="tab_cell_left">
-      <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
-      <a href="#transactions/<%- title %>"><%- title %></a>
+      <a href="#transactions/<%- note %>"><%- note %></a>
     </td>
     <td class="tab_cell"><%- Number(amount).toFixed(2) %></td><td class="tab_cell_action">
       <div>
@@ -198,6 +197,9 @@
       initialize: function(){
         this.model.on('change', this.render, this);
         this.model.on('destroy', this.remove, this); // remove: Convenience Backbone's function for removing the view from the DOM.
+      },
+      destroy: function(){
+         this.model.destroy();
       }      
     })
 
@@ -271,7 +273,7 @@
       },
       transactions: function(category) {
         console.log('Transactions = ' + category);
-        app.transactionList.url = 'http://swap.korotenko.me/sql.php?action=transactions';
+        app.transactionList.url = 'http://swap.korotenko.me/sql.php?action=transactions&category='+category;
         app.transactionList.fetch();
       }
     });
