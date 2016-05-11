@@ -33,9 +33,12 @@ define(function (require) {
         },
         collection: accountList,
         update: function() {
-          var spin = _.template(spinner);
+          var spin = _.template(spinner),
+              that = this;
           this.$el.html(spin());
-          this.collection.fetch();
+          this.collection.fetch({
+            success: function(){that.$el.html('');}
+          });
           return this;
         },
         renderNew: function(model) {
