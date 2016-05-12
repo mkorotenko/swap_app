@@ -5,13 +5,6 @@ define(function (require) {
     var $                   = require('jquery'),
         Backbone            = require('backbone'),
 
-        accounts = [
-            {"id": 1, "title": "Super President and CEO", "amount": 100},
-            {"id": 2, "title": "VP of Marketing", "amount": 200},
-            {"id": 3, "title": "CFO", "amount": 300},
-            {"id": 4, "title": "VP of Engineering", "amount": 400},
-        ],
-
         findById = function (id) {
             var deferred = $.Deferred(),
                 account = null,
@@ -42,20 +35,8 @@ define(function (require) {
         }),
 
         AccountCollection = Backbone.Collection.extend({
-
-            model: Account,
-
-            sync: function (method, model, options) {
-                if (method === "read") {
-                    //findById(options.data.id).done(function (data) {
-                    var loptions = options,
-                        laccounts = accounts;
-                    setTimeout(function(){
-                      loptions.success(laccounts);
-                    },1200);
-                }
-            }
-
+          model: Account,
+          url: 'http://swap.korotenko.me/swap_restful.php?action=list'
         });
 
     return {
