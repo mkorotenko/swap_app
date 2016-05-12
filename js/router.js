@@ -13,21 +13,29 @@ define([
       '' : 'accounts',
       'card/:account': 'transactions'
     },
-    accounts: function() {
-      // homeView.render();
-      homeView.accounts();
+    renderPath: function(path) {
       var currentPath = $('#current-path');
       currentPath.html();
       currentPath.append('<a href="#/">Account list</a>');
+      for(var i=0; i<path.length; i++){
+        currentPath.append('<span>/</span>');
+        currentPath.append('<a href="#/card/'+path[i]+'">'+path[i]+'</a>');
+      }
+    },
+    accounts: function() {
+      // homeView.render();
+      homeView.accounts();
+      this.renderPath([]);
     },
     transactions: function(account) {
       // console.log('Account id: '+account);
       homeView.transactions(account);
-      var currentPath = $('#current-path');
-      currentPath.html();
-      currentPath.append('<a href="#/">Account list</a>');
-      currentPath.append('<span>/</span>');
-      currentPath.append('<a href="#/card/'+account+'">'+account+'</a>');
+      this.renderPath([account]);
+      // var currentPath = $('#current-path');
+      // currentPath.html();
+      // currentPath.append('<a href="#/">Account list</a>');
+      // currentPath.append('<span>/</span>');
+      // currentPath.append('<a href="#/card/'+account+'">'+account+'</a>');
     }
       // setFilter: function(params) {
       //   console.log('app.router.params = ' + params);
