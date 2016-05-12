@@ -275,4 +275,14 @@ th, td {
 .table-box {
     display: table-cell;
     text-align: center;
+    padding: 7px 0 7px 0;
+}
+.table-box.value-text{
+  text-align: left;
+  padding: 7px 0 7px 10px;
+  width: 15em;
+}
+.table-box.value-number{
+  text-align: right;
+  padding: 7px 10px 7px 0;
 }
