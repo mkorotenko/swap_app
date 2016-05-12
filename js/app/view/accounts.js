@@ -6,47 +6,52 @@ define(function (require) {
         _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/accounts.html'),
-        spinner             = require('text!tpl/spinner.html'),
         models              = require('app/model/account');
-        // template            = _.template(tpl);
-    var blanket_tpl = _.template(spinner);
+
     var accountList = new models.AccountCollection();
-        // accountList.fetch();
     var AccountView = Backbone.View.extend({
-      tagName: 'li',
-      template: _.template(tpl),
-      initialize: function(){
-        this.render();
-      },
-      render: function(){
-        this.$el.html(this.template(this.model.toJSON()));
-      }
-    });
+        tagName: 'li',
+        template: _.template(tpl),
+        initialize: function(){
+          this.render();
+        },
+        render: function(){
+          this.$el.html(this.template(this.model.toJSON()));
+        }
+      });
 
     return Backbone.View.extend({
         el: '#data-container',
         tagName: 'ul',
+        collection: accountList,
         initialize: function () {
           this.collection.on("reset", this.render, this);
           this.collection.on("add", this.renderNew, this);
           return this;
         },
-        collection: accountList,
+        busy: function(isBusy){
+          var blanket = $('#Blanket');
+          if(!isBusy) blanket.css('display','none');
+          else blanket.css('display','block');
+          return this;
+        },
         update: function() {
-          this.$el.html(blanket_tpl());
+          this.busy(true);
           this.collection.fetch({
-            success: function(){
-              //that.$el.html('');
+            success:  function(){
+              this.busy(false);
               $('#Blanket').css('display','none');
-            }
+            }.bind(this)
           });
           return this;
         },
         renderNew: function(model) {
-            var accountView = new AccountView({model: model});
-            this.$el.append(accountView.el);
+          var accountView = new AccountView({model: model});
+          this.$el.append(accountView.el);
+          return this;
         },
         render: function () {
+          this.$el.html('');
           this.collection.each(function(item){
             var accountView = new AccountView({model: item});
             this.$el.append(accountView.el);
