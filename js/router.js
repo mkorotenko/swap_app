@@ -16,10 +16,18 @@ define([
     accounts: function() {
       // homeView.render();
       homeView.accounts();
+      var currentPath = $('#current-path');
+      currentPath.html();
+      currentPath.append('<a href="#/">Account list</a>');
     },
     transactions: function(account) {
-      console.log('Account id: '+account);
+      // console.log('Account id: '+account);
       homeView.transactions(account);
+      var currentPath = $('#current-path');
+      currentPath.html();
+      currentPath.append('<a href="#/">Account list</a>');
+      currentPath.append('<span>/</span>');
+      currentPath.append('<a href="#/card/'+account+'">'+account+'</a>');
     }
       // setFilter: function(params) {
       //   console.log('app.router.params = ' + params);
