@@ -23,7 +23,6 @@ define(function (require) {
 
     return Backbone.View.extend({
         //el: '#data-container',
-        //el: '#account-list',
         //tagName: 'ul',
         collection: accountList,
         initialize: function () {
@@ -45,7 +44,9 @@ define(function (require) {
           this.collection.fetch({
             success:  function(){
               this.busy(false);
-              $('#Blanket').css('display','none');
+            }.bind(this),
+            error:  function(){
+              this.busy(false);
             }.bind(this)
           });
           return this;
