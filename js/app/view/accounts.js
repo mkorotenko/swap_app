@@ -10,7 +10,8 @@ define(function (require) {
 
     var accountList = new models.AccountCollection();
     var AccountView = Backbone.View.extend({
-        tagName: 'li',
+        tagName: 'div',
+        className: 'table-row-box',
         template: _.template(tpl),
         initialize: function(){
           this.render();
@@ -21,12 +22,16 @@ define(function (require) {
       });
 
     return Backbone.View.extend({
-        el: '#data-container',
-        tagName: 'ul',
+        //el: '#data-container',
+        //el: '#account-list',
+        //tagName: 'ul',
         collection: accountList,
         initialize: function () {
           this.collection.on("reset", this.render, this);
           this.collection.on("add", this.renderNew, this);
+          $('#data-container').append('<div id="account-list" class="data-table"></div>');
+          this.el = '#account-list';
+          this.$el = $(this.el);
           return this;
         },
         busy: function(isBusy){

@@ -256,3 +256,23 @@ th, td {
     box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
   }
 }
+
+.data-table {
+    display: table;
+    width:100%;
+    table-layout: fixed;
+}
+.data-table div.table-row-box:nth-child(even) {
+  background-color: #DAE1E8;
+}
+.table-title-box {
+    display: table-header-group;
+    font-weight: bold;
+}
+.table-row-box {
+    display: table-row-group;
+}
+.table-box {
+    display: table-cell;
+    text-align: center;
+}
