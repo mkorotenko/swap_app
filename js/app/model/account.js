@@ -50,7 +50,9 @@ define(function (require) {
                     //findById(options.data.id).done(function (data) {
                     var loptions = options,
                         laccounts = accounts;
-                    setTimeout(function(){loptions.success(laccounts);},200);
+                    setTimeout(function(){
+                      loptions.success(laccounts);
+                    },1200);
                 }
             }
 
