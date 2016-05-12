@@ -140,9 +140,9 @@ a.button
 	text-decoration: none;
 	color: initial;
 	min-width: 1.5em;
-	height: 1.5em;
+	/*height: 1.5em;*/
 	text-align: center;
-	padding-top: 10px;
+	/*padding-top: 10px;*/
 }
 .list_cont
 {
@@ -275,4 +275,14 @@ th, td {
 .table-box {
     display: table-cell;
     text-align: center;
+    padding: 7px 0 7px 0;
+}
+.table-box.value-text{
+  text-align: left;
+  padding: 7px 0 7px 10px;
+  width: 15em;
+}
+.table-box.value-number{
+  text-align: right;
+  padding: 7px 10px 7px 0;
 }
