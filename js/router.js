@@ -4,26 +4,38 @@ define([
   'underscore',
   'backbone',
   'app/view/home'
-  //'app/view/accounts'
-  //'views/accountsList'
-  //'views/transactionsList'
-], function($, _, Backbone, HomeView){//, Accounts){//, Transactions){
+], function($, _, Backbone, HomeView){
   var $content = $("#header"),
       $main = $("#data-container"),
       homeView = new HomeView({el: $content});
   var AppRouter = Backbone.Router.extend({
     routes: {
-      '' : 'accounts'
-      // 'filter/:search' : 'setFilter',
-      // 'add/:category' : 'newRecord',
-      // 'cor/:category' : 'corRecord',
-      // 'edit/:recId' : 'editRecord',
-      // 'transactions/:category' : 'transactions'
+      '' : 'accounts',
+      'card/:account': 'transactions'
+    },
+    renderPath: function(path) {
+      var currentPath = $('#current-path');
+      currentPath.html();
+      currentPath.append('<a href="#/">Account list</a>');
+      for(var i=0; i<path.length; i++){
+        currentPath.append('<span>/</span>');
+        currentPath.append('<a href="#/card/'+path[i]+'">'+path[i]+'</a>');
+      }
     },
     accounts: function() {
-      //var accounts = new AccountsView({el: $main});
-        homeView.render();
-        //accounts.render();
+      // homeView.render();
+      homeView.accounts();
+      this.renderPath([]);
+    },
+    transactions: function(account) {
+      // console.log('Account id: '+account);
+      homeView.transactions(account);
+      this.renderPath([account]);
+      // var currentPath = $('#current-path');
+      // currentPath.html();
+      // currentPath.append('<a href="#/">Account list</a>');
+      // currentPath.append('<span>/</span>');
+      // currentPath.append('<a href="#/card/'+account+'">'+account+'</a>');
     }
       // setFilter: function(params) {
       //   console.log('app.router.params = ' + params);

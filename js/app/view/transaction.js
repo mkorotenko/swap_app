@@ -5,11 +5,11 @@ define(function (require) {
     var $                   = require('jquery'),
         _                   = require('underscore'),
         Backbone            = require('backbone'),
-        tpl                 = require('text!tpl/accounts.html'),
-        models              = require('app/model/account');
+        tpl                 = require('text!tpl/transactions.html'),
+        models              = require('app/model/transaction');
 
-    var accountList = new models.AccountCollection();
-    var AccountView = Backbone.View.extend({
+    var transactionList = new models.TransactionCollection();
+    var TransactionView = Backbone.View.extend({
         tagName: 'div',
         className: 'table-row-box',
         template: _.template(tpl),
@@ -24,13 +24,10 @@ define(function (require) {
     return Backbone.View.extend({
         //el: '#data-container',
         //tagName: 'ul',
-        collection: accountList,
+        collection: transactionList,
         initialize: function () {
           this.collection.on("reset", this.render, this);
           this.collection.on("add", this.renderNew, this);
-          $('#data-container').html('<div id="account-list" class="data-table"></div>');
-          this.el = '#account-list';
-          this.$el = $(this.el);
           return this;
         },
         busy: function(isBusy){
@@ -40,9 +37,10 @@ define(function (require) {
           return this;
         },
         update: function() {
-          $('#data-container').html('<div id="account-list" class="data-table"></div>');
-          this.el = '#account-list';
+          $('#data-container').html('<div id="transaction-list" class="data-table"></div>');
+          this.el = '#transaction-list';
           this.$el = $(this.el);
+          this.$el.html('');
           if(!this.collection.length){
             this.busy(true);
             this.collection.fetch({
@@ -60,19 +58,20 @@ define(function (require) {
           return this;
         },
         renderNew: function(model) {
-          var accountView = new AccountView({model: model});
-          this.$el.append(accountView.el);
+          var transactionView = new TransactionView({model: model});
+          this.$el.append(transactionView.el);
           return this;
         },
         render: function () {
+          $('#data-container').html('<div id="transaction-list" class="data-table"></div>');
+          this.el = '#transaction-list';
+          this.$el = $(this.el);
           this.$el.html('');
           this.collection.each(function(item){
-            var accountView = new AccountView({model: item});
-            this.$el.append(accountView.el);
+            var transactionView = new TransactionView({model: item});
+            this.$el.append(transactionView.el);
           }, this);
           return this;
         }
-
     });
-
 });
