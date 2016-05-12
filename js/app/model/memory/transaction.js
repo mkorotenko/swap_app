@@ -12,6 +12,8 @@ define(function (require) {
             {"id": 4, "date": new Date(), "note": "VP of Engineering", "amount": 400},
         ],
 
+    // 'http://swap.korotenko.me/swap_restful.php?action=transactions&category='+category;
+
         findById = function (id) {
             var deferred = $.Deferred(),
                 transaction = null,
