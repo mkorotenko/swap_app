@@ -52,7 +52,7 @@ define(function (require) {
                         laccounts = accounts;
                     setTimeout(function(){
                       loptions.success(laccounts);
-                    },200);
+                    },1200);
                 }
             }
 

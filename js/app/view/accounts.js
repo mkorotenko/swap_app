@@ -9,7 +9,7 @@ define(function (require) {
         spinner             = require('text!tpl/spinner.html'),
         models              = require('app/model/account');
         // template            = _.template(tpl);
-
+    var blanket_tpl = _.template(spinner);
     var accountList = new models.AccountCollection();
         // accountList.fetch();
     var AccountView = Backbone.View.extend({
@@ -33,12 +33,11 @@ define(function (require) {
         },
         collection: accountList,
         update: function() {
-          var spin = _.template(spinner),
-              that = this;
-          this.$el.html(spin());
+          this.$el.html(blanket_tpl());
           this.collection.fetch({
             success: function(){
               //that.$el.html('');
+              $('#Blanket').css('display','none');
             }
           });
           return this;
