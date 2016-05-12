@@ -4,15 +4,15 @@ require.config({
     baseUrl: 'js/lib',
 
     paths: {
-        app: '../app',
-        tpl: '../tpl'
+      app: '../app',
+      tpl: '../tpl'
     },
 
-    // map: {
-    //     '*': {
-    //         'app/models/employee': 'app/models/memory/employee'
-    //     }
-    //},
+    map: {
+      '*': {
+          'app/model/account': 'app/model/restful/account'
+        }
+    },
 
     shim: {
         'backbone': {
