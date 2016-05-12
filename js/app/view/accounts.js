@@ -37,7 +37,9 @@ define(function (require) {
               that = this;
           this.$el.html(spin());
           this.collection.fetch({
-            success: function(){that.$el.html('');}
+            success: function(){
+              //that.$el.html('');
+            }
           });
           return this;
         },
