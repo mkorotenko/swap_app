@@ -10,7 +10,8 @@ require.config({
 
     map: {
       '*': {
-          'app/model/account': 'app/model/restful/account'
+          'app/model/account': 'app/model/restful/account',
+          'app/model/transaction': 'app/model/memory/transaction'
         }
     },
 

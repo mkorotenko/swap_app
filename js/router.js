@@ -14,10 +14,12 @@ define([
       'card/:account': 'transactions'
     },
     accounts: function() {
-      homeView.render();
+      // homeView.render();
+      homeView.accounts();
     },
     transactions: function(account) {
       console.log('Account id: '+account);
+      homeView.transactions(account);
     }
       // setFilter: function(params) {
       //   console.log('app.router.params = ' + params);
