@@ -7,8 +7,7 @@ define(function (require) {
         Backbone            = require('backbone'),
         Accounts            = require('app/view/accounts'),
         Transactions        = require('app/view/transaction'),
-        tpl                 = require('text!tpl/home.html'),
-        template            = _.template(tpl);
+        template            = _.template(require('text!tpl/home.html'));
         
     var accounts = new Accounts(),
         transactions = new Transactions();
