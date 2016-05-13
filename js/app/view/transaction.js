@@ -24,6 +24,7 @@ define(function (require) {
     return Backbone.View.extend({
         //el: '#data-container',
         //tagName: 'ul',
+        parent: Backbone.Collection.extend({}),
         collection: transactionList,
         initialize: function () {
           this.collection.on("reset", this.render, this);
@@ -36,7 +37,10 @@ define(function (require) {
           else blanket.css('display','block');
           return this;
         },
-        update: function() {
+        update: function(accountId) {
+          var accountList         = require('app/model/account');
+          this.parent = accountList.get(accountId);
+
           $('#data-container').html('<div id="transaction-list" class="data-table"></div>');
           this.el = '#transaction-list';
           this.$el = $(this.el);

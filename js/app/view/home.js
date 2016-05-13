@@ -7,29 +7,25 @@ define(function (require) {
         Backbone            = require('backbone'),
         Accounts            = require('app/view/accounts'),
         Transactions        = require('app/view/transaction'),
-        tpl                 = require('text!tpl/home.html'),
-        template            = _.template(tpl);
+        template            = _.template(require('text!tpl/home.html'));
         
     var accounts = new Accounts(),
         transactions = new Transactions();
 
     return Backbone.View.extend({
-      
       accounts: function() {
         this.render();
         accounts.update();
       },
-      transactions: function(trId) {
+      transactions: function(accountId) {
         this.render();
-        transactions.update();
+        transactions.update(accountId);
       },
-
-        render: function () {
-            this.$el.html(template());
-            // accounts.update();
-            return this;
-        }
-
+      render: function () {
+        this.$el.html(template());
+        // accounts.update();
+        return this;
+      }
     });
 
 });

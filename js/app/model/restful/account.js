@@ -16,9 +16,7 @@ define(function (require) {
           url: 'http://swap.korotenko.me/swap_restful.php?action=list'
         });
 
-    return {
-      Account: Account,
-      AccountCollection: AccountCollection
-    };
+    var transactionList = new AccountCollection();
+    return transactionList;
 
 });

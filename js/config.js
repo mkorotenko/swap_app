@@ -5,7 +5,9 @@ require.config({
 
     paths: {
       app: '../app',
-      tpl: '../tpl'
+      tpl: '../tpl',
+      js: '../../js',
+      view: '../app/view'
     },
 
     map: {
@@ -26,7 +28,7 @@ require.config({
     }
 });
 
-require(['jquery', 'backbone', '../router'], function ($, Backbone, Router) {
+require(['jquery', 'backbone', 'js/main'], function ($, Backbone, application) {
 
     Date.prototype.toString = function() {
       var yyyy = this.getFullYear().toString(),
@@ -35,6 +37,6 @@ require(['jquery', 'backbone', '../router'], function ($, Backbone, Router) {
       return yyyy+'-'+(mm[1]?mm:"0"+mm[0])+'-'+(dd[1]?dd:"0"+dd[0]);
     };
     
-    var router = new Router();
-    Backbone.history.start();
+    application.start();
+    
 });
