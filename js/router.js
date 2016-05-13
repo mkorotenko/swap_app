@@ -11,7 +11,8 @@ define([
   var AppRouter = Backbone.Router.extend({
     routes: {
       '' : 'accounts',
-      'card/:account': 'transactions'
+      'card/:account': 'transactions',
+      'card/:account/:record': 'editTransaction'
     },
     renderPath: function(path) {
       var currentPath = $('#current-path');
@@ -29,6 +30,11 @@ define([
     transactions: function(account) {
       pages.transactions(account);
       this.renderPath([account]);
+    },
+    editTransaction: function(account,record) {
+      //pages.transactions(account);
+      //this.renderPath([account]);
+      console.log('Path: account '+account+' / record '+record);
     }
       // setFilter: function(params) {
       //   console.log('app.router.params = ' + params);
