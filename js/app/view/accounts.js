@@ -6,9 +6,10 @@ define(function (require) {
         _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/accounts.html'),
-        models              = require('app/model/account');
+        //models              = require('app/model/account');
+        accountList         = require('app/model/account');
 
-    var accountList = new models.AccountCollection();
+    //var accountList = new models.AccountCollection();
     var AccountView = Backbone.View.extend({
         tagName: 'div',
         className: 'table-row-box',

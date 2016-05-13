@@ -14,22 +14,19 @@ define(function (require) {
         transactions = new Transactions();
 
     return Backbone.View.extend({
-      
       accounts: function() {
         this.render();
         accounts.update();
       },
-      transactions: function(trId) {
+      transactions: function(accountId) {
         this.render();
-        transactions.update();
+        transactions.update(accountId);
       },
-
-        render: function () {
-            this.$el.html(template());
-            // accounts.update();
-            return this;
-        }
-
+      render: function () {
+        this.$el.html(template());
+        // accounts.update();
+        return this;
+      }
     });
 
 });
