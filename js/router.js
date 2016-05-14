@@ -3,15 +3,14 @@ define([
   'jquery',
   'underscore',
   'backbone',
-   'js/main',
-   'view/home'
-], function($, _, Backbone, app, Pages){
+   'js/main'
+], function($, _, Backbone, application){
 
     "use strict";
-
-  var $content = $("#header"),
-      $main = $("#data-container"),
-      pages = new Pages({el: $content});
+  var app = application;
+  // var $content = $("#header"),
+  //     $main = $("#data-container"),
+  //     pages = new Pages({el: $content});
   var AppRouter = Backbone.Router.extend({
       routes: {
         '' : 'accounts',
@@ -28,11 +27,13 @@ define([
         }
       },
       accounts: function() {
-        pages.accounts();
+        // pages.accounts();
+        app.switchPage('accounts');
         this.renderPath([]);
       },
       transactions: function(account) {
-        pages.transactions(account);
+        // pages.transactions(account);
+        app.switchPage('transactions',account);
         this.renderPath([account]);
       },
       editTransaction: function(account,record) {
