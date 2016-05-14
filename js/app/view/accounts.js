@@ -6,10 +6,8 @@ define(function (require) {
         _                   = require('underscore'),
         Backbone            = require('backbone'),
         tpl                 = require('text!tpl/accounts.html'),
-        //models              = require('app/model/account');
         accountList         = require('app/model/account');
 
-    //var accountList = new models.AccountCollection();
     var AccountView = Backbone.View.extend({
         tagName: 'div',
         className: 'table-row-box',
@@ -23,8 +21,6 @@ define(function (require) {
       });
 
     return Backbone.View.extend({
-        //el: '#data-container',
-        //tagName: 'ul',
         collection: accountList,
         initialize: function () {
           this.collection.on("reset", this.render, this);
@@ -35,9 +31,9 @@ define(function (require) {
           return this;
         },
         busy: function(isBusy){
-          var blanket = $('#Blanket');
+          var blanket = $('.blanket-spinner','.content');
           if(!isBusy) blanket.css('display','none');
-          else blanket.css('display','block');
+          else blanket.css('display','flex');
           return this;
         },
         update: function() {
@@ -57,6 +53,7 @@ define(function (require) {
           }
           else {
             this.render();
+            this.busy(false);
           }
           return this;
         },

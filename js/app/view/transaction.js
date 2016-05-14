@@ -32,9 +32,9 @@ define(function (require) {
           return this;
         },
         busy: function(isBusy){
-          var blanket = $('#Blanket');
+          var blanket = $('.blanket-spinner','.content');
           if(!isBusy) blanket.css('display','none');
-          else blanket.css('display','block');
+          else blanket.css('display','flex');
           return this;
         },
         update: function(accountId) {
@@ -58,6 +58,7 @@ define(function (require) {
           }
           else {
             this.render();
+            this.busy(false);
           }
           return this;
         },

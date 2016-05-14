@@ -18,7 +18,7 @@ define(function (require) {
       el: '#app-container',
       accounts: function() {
         this.render();
-        //accounts.update();
+        accounts.update();
       },
       transactions: function(accountId) {
         this.render();
