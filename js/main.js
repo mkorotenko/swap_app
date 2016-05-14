@@ -2,18 +2,21 @@ define([
   'jquery',
   'underscore',
   'backbone',
-   'js/router'
-], function($, _, Backbone, Router){
+   //'js/router',
+   'view/home'
+], function($, _, Backbone, Pages){
 
-  var router;
-  // var $content = $("#header"),
-  //   $main = $("#data-container");
-    //Pages = require('view/home'),
-    //pages = new Pages({el: $content});
+  //var router;
+  var $content = $("#header"),
+      $main = $("#data-container"),
+      pages = new Pages({el: $content});
   var Application = Backbone.Model.extend({
     start: function(){
-      router = new Router();
-      Backbone.history.start();
+      //router = new Router();
+      //Backbone.history.start();
+    },
+    switchPage: function(page){
+      pages[page](arguments[1]);
     }
   });
 
