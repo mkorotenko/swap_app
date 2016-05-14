@@ -9,10 +9,11 @@ define(function (require) {
         Transactions        = require('app/view/transaction'),
         template            = _.template(require('text!tpl/home.html'));
         
-    var accounts = new Accounts(),
+    var accounts = new Accounts({el: $('#data-container')}),
         transactions = new Transactions();
 
     return Backbone.View.extend({
+      el: '#app-container',
       accounts: function() {
         this.render();
         accounts.update();
@@ -22,7 +23,12 @@ define(function (require) {
         transactions.update(accountId);
       },
       render: function () {
-        this.$el.html(template());
+        //this.$el.html(template());
+        var header = _.template(require('text!tpl/header.html')),
+          body = _.template(require('text!tpl/body.html'));
+        this.$el.html('');
+        this.$el.append(header());
+        this.$el.append(body());
         // accounts.update();
         return this;
       }
