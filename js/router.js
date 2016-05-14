@@ -1,12 +1,14 @@
 // Filename: router.js
-define(function (require) {
+define([
+  'jquery',
+  'underscore',
+  'backbone',
+   'js/main',
+   'view/home'
+], function($, _, Backbone, app, Pages){
 
     "use strict";
 
-  var $                   = require('jquery'),
-      _                   = require('underscore'),
-      Backbone            = require('backbone'),
-      Pages               = require('view/home');
   var $content = $("#header"),
       $main = $("#data-container"),
       pages = new Pages({el: $content});
