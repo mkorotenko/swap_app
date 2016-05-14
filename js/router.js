@@ -19,7 +19,7 @@ define([
       },
       renderPath: function(path) {
         var currentPath = $('#current-path');
-        currentPath.html();
+        currentPath.html('');
         currentPath.append('<a href="#/">Account list</a>');
         for(var i=0; i<path.length; i++){
           currentPath.append('<span>/</span>');

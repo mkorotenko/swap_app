@@ -6,23 +6,33 @@ define(function (require) {
         _                   = require('underscore'),
         Backbone            = require('backbone'),
         Accounts            = require('app/view/accounts'),
-        Transactions        = require('app/view/transaction'),
+        // Transactions        = require('app/view/transaction'),
         header              = _.template(require('text!tpl/header.html')),
         body                = _.template(require('text!tpl/body.html')),
         spinner             = _.template(require('text!tpl/spinner.html'));
 
-    var accounts      = new Accounts({el: $('#data-container')}),
-        transactions  = new Transactions({el: $('#data-container')});
+    var accounts      = new Accounts({el: $('#data-container')});
+        // transactions  = new Transactions({el: $('#data-container')});
 
     return Backbone.View.extend({
       el: '#app-container',
       accounts: function() {
         this.render();
         accounts.update();
+        return this;
       },
       transactions: function(accountId) {
+        var account = accounts.collection.get(accountId);
+        if(!account){
+          this.pageNotFound();
+          return;
+        }
+        account.transactions.update();
+      },
+      pageNotFound: function(){
         this.render();
-        transactions.update(accountId);
+        $('#data-container').html('Page not found');
+        return this;
       },
       render: function () {
         this.$el.html('');
