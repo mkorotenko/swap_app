@@ -10,8 +10,8 @@
 }
 
 .box .row.header {
-  flex: 0 1 80px;
-  background-color: #ACE1E8;
+  flex: 0 1 130px;
+  /*background-color: #ACE1E8;*/
 }
 
 .box .row.content {

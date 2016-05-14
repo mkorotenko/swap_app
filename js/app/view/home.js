@@ -26,7 +26,12 @@ define(function (require) {
       },
       render: function () {
         this.$el.html('');
-        this.$el.append(header());
+        this.$el.append($(header()).append('<header id="header" style="padding: 5px;">'+
+              '<h1><font color="red">A</font>ccounts</h1>'+
+              '<input id="serach" placeholder="What needs to be done?">'+
+              '<div id="current-path">'+
+              '</div>'+
+              '</header>'));
         this.$el.append($(body()).append(spinner()));
         return this;
       }
