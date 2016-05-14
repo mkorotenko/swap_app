@@ -10,13 +10,13 @@
 }
 
 .box .row.header {
-  flex: 0 1 auto;
+  flex: 0 1 80px;
   background-color: #ACE1E8;
 }
 
 .box .row.content {
   flex: 1 1 auto;
-  background-color: #DAE1E8;
+  /*background-color: #DAE1E8;*/
   overflow-y: auto;
 }
 

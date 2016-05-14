@@ -7,29 +7,27 @@ define(function (require) {
         Backbone            = require('backbone'),
         Accounts            = require('app/view/accounts'),
         Transactions        = require('app/view/transaction'),
-        template            = _.template(require('text!tpl/home.html'));
-        
-    var accounts = new Accounts({el: $('#data-container')}),
-        transactions = new Transactions();
+        header              = _.template(require('text!tpl/header.html')),
+        body                = _.template(require('text!tpl/body.html')),
+        spinner             = _.template(require('text!tpl/spinner.html'));
+
+    var accounts      = new Accounts({el: $('#data-container')}),
+        transactions  = new Transactions({el: $('#data-container')});
 
     return Backbone.View.extend({
       el: '#app-container',
       accounts: function() {
         this.render();
-        accounts.update();
+        //accounts.update();
       },
       transactions: function(accountId) {
         this.render();
         transactions.update(accountId);
       },
       render: function () {
-        //this.$el.html(template());
-        var header = _.template(require('text!tpl/header.html')),
-          body = _.template(require('text!tpl/body.html'));
         this.$el.html('');
         this.$el.append(header());
-        this.$el.append(body());
-        // accounts.update();
+        this.$el.append($(body()).append(spinner()));
         return this;
       }
     });
