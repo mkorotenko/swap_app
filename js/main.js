@@ -1,29 +1,20 @@
 define([
   'jquery',
   'underscore',
-  'backbone',
-  'app/model/account',
-  'app/model/transaction'
-], function($, _, Backbone, Account, Transaction){
+  'backbone'
+], function($, _, Backbone){
 
   var Application = Backbone.Model.extend({
-    pageViewers: {},
-    accountList: new Account(),
-    transactionList: new Transaction(),
     start: function(){
     },
     switchPage: function(page,unitId){
-      //if(!this.pageViewers[page]){
-        require(['view/'+page+'ListView'],function(ListPageView){
-          var view = new ListPageView({
-            collection: this[page+'List']
-          });
-          this.pageViewers[page] = view;
-          view.open(unitId).update();
-        }.bind(this));
-        return;
-      //}
-      //this.pageViewers[page].open(unitId).update();
+      require(['view/'+page+'ListView','app/model/'+page],function(ListPageView,Collection){
+        var view = new ListPageView({
+          collection: new Collection()
+        });
+        view.open(unitId).update();
+      }.bind(this));
+      return;
     }
   });
 
