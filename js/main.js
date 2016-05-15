@@ -3,16 +3,16 @@ define([
   'underscore',
   'backbone',
   'app/model/account'
-], function($, _, Backbone, account){
+], function($, _, Backbone, Account){
 
   var Application = Backbone.Model.extend({
     pageViewers: {},
-    accountsList: account,
+    accountList: new Account(),
     start: function(){
     },
     switchPage: function(page,unitId){
-      if(!this.pageViewers[page]){
-        require(['view/accountListView'],function(ListPageView){
+      //if(!this.pageViewers[page]){
+        require(['view/'+page+'ListView'],function(ListPageView){
           var view = new ListPageView({
             collection: this[page+'List']
           });
@@ -20,8 +20,8 @@ define([
           view.open(unitId).update();
         }.bind(this));
         return;
-      }
-      this.pageViewers[page].open(unitId).update();
+      //}
+      //this.pageViewers[page].open(unitId).update();
     }
   });
 

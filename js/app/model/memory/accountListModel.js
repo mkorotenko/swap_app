@@ -58,9 +58,6 @@ define(function (require) {
 
         });
 
-    return {
-        Account: Account,
-        AccountCollection: AccountCollection
-    };
+  return AccountCollection;
 
 });

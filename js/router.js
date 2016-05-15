@@ -19,12 +19,12 @@ define([
       },
       accounts: function() {
         // pages.accounts();
-        app.switchPage('accounts');
+        app.switchPage('account');
         // this.renderPath([]);
       },
       transactions: function(account) {
         // pages.transactions(account);
-        app.switchPage('transactions',account);
+        app.switchPage('transaction',account);
         // this.renderPath([account]);
       },
       editTransaction: function(account,record) {
