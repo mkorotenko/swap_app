@@ -7,13 +7,17 @@ require.config({
       app: '../app',
       tpl: '../tpl',
       js: '../../js',
-      view: '../app/view'
+      view: '../app/view',
+      model: '../app/model'
     },
 
     map: {
       '*': {
-          'app/model/account': 'app/model/restful/account',
-          'app/model/transaction': 'app/model/memory/transaction'
+          'app/model/account': 'app/model/restful/accountListModel',
+          'app/model/transaction': 'app/model/memory/transactionListModel',
+          'app/view/accounts': 'app/view/accountListView',
+          'app/view/transaction': 'app/view/transactionListView',
+          'view/home': 'app/view/listPage',
         }
     },
 
