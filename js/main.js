@@ -10,7 +10,7 @@ define([
     switchPage: function(page,unitId){
       require(['view/'+page+'ListView','app/model/'+page],function(ListPageView,Collection){
         var view = new ListPageView({
-          collection: new Collection()
+          collection: new (Collection.extend({category:'usd'}))()
         });
         view.open(unitId).update();
       }.bind(this));
