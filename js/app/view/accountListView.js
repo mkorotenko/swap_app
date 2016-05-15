@@ -5,8 +5,8 @@ define(function (require) {
   var $                   = require('jquery'),
       _                   = require('underscore'),
       Backbone            = require('backbone'),
-      tpl                 = require('text!tpl/accounts.html'),
       ListPageView        = require('view/listPage'),
+      tpl                 = require('text!tpl/accounts.html'),
       AccountView = Backbone.View.extend({
         tagName: 'div',
         className: 'table-row-box',
@@ -18,26 +18,8 @@ define(function (require) {
           this.$el.html(this.template(this.model.toJSON()));
         }
       });
-  
+
   return ListPageView.extend({
-    update: function() {
-      if(!this.collection.length){
-        this.busy(true);
-        this.collection.fetch({
-          success:  function(){
-            this.busy(false);
-          }.bind(this),
-          error:  function(){
-            this.busy(false);
-          }.bind(this)
-        });
-      }
-      else {
-        this.render();
-        this.busy(false);
-      }
-      return this;
-    },
     renderNew: function(model) {
       var accountView = new AccountView({model: model});
       $('#account-list').append(accountView.el);

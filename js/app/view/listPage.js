@@ -19,6 +19,24 @@ define(function (require) {
         currentPath.append('<a href="#card/'+path[i]+'">'+path[i]+'</a>');
       }
     },
+    update: function() {
+      if(!this.collection.length){
+        this.busy(true);
+        this.collection.fetch({
+          success:  function(){
+            this.busy(false);
+          }.bind(this),
+          error:  function(){
+            this.busy(false);
+          }.bind(this)
+        });
+      }
+      else {
+        this.render();
+        this.busy(false);
+      }
+      return this;
+    },
     busy: function(isBusy){
       var blanket = $('.blanket-spinner','.content');
       if(!isBusy) blanket.css('display','none');

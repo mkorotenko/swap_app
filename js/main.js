@@ -2,12 +2,14 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'app/model/account'
-], function($, _, Backbone, Account){
+  'app/model/account',
+  'app/model/transaction'
+], function($, _, Backbone, Account, Transaction){
 
   var Application = Backbone.Model.extend({
     pageViewers: {},
     accountList: new Account(),
+    transactionList: new Transaction(),
     start: function(){
     },
     switchPage: function(page,unitId){
