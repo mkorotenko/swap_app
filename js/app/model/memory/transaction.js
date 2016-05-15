@@ -60,9 +60,10 @@ define(function (require) {
 
         });
 
-    return {
-      Transaction: Transaction,
-      TransactionCollection: TransactionCollection
-    };
-
+    // return {
+    //   Transaction: Transaction,
+    //   TransactionCollection: TransactionCollection
+    // };
+    return TransactionCollection;
+    
 });

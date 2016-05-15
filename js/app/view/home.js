@@ -6,24 +6,43 @@ define(function (require) {
         _                   = require('underscore'),
         Backbone            = require('backbone'),
         Accounts            = require('app/view/accounts'),
-        Transactions        = require('app/view/transaction'),
-        template            = _.template(require('text!tpl/home.html'));
-        
-    var accounts = new Accounts(),
-        transactions = new Transactions();
+        // Transactions        = require('app/view/transaction'),
+        header              = _.template(require('text!tpl/header.html')),
+        body                = _.template(require('text!tpl/body.html')),
+        spinner             = _.template(require('text!tpl/spinner.html'));
+
+    var accounts      = new Accounts({el: $('#data-container')});
+        // transactions  = new Transactions({el: $('#data-container')});
 
     return Backbone.View.extend({
+      el: '#app-container',
       accounts: function() {
         this.render();
         accounts.update();
+        return this;
       },
       transactions: function(accountId) {
+        var account = accounts.collection.get(accountId);
+        if(!account){
+          this.pageNotFound();
+          return;
+        }
+        account.transactions.update();
+      },
+      pageNotFound: function(){
         this.render();
-        transactions.update(accountId);
+        $('#data-container').html('Page not found');
+        return this;
       },
       render: function () {
-        this.$el.html(template());
-        // accounts.update();
+        this.$el.html('');
+        this.$el.append($(header()).append('<header id="header" style="padding: 5px;">'+
+              '<h1><font color="red">A</font>ccounts</h1>'+
+              '<input id="serach" placeholder="What needs to be done?">'+
+              '<div id="current-path">'+
+              '</div>'+
+              '</header>'));
+        this.$el.append($(body()).append(spinner()));
         return this;
       }
     });

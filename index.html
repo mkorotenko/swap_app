@@ -6,27 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SWAP</title>
     <link href="style.css" type="text/css" rel="stylesheet">
+    <link href="flex.css" type="text/css" rel="stylesheet">
   </head>
   <body>
-
-    <section id="appContainer">
-      <header id="header">
-
-      </header>
-      <section id="main">
-        <div class="bordered">
-          <div id="Blanket" style="display:none">
-            <div class="loader">Loading...</div>
-            <div class="blanket "></div>
-          </div>
-          <div id="data-container">
-
-          </div>
-        </div>
-      </section>
-    </section>
-  
+    <div id="app-container" class="box">
+      <div class="blanket-spinner">
+        <div class="loader">Loading...</div>
+        <div class="blanket"></div>
+      </div>
+    </div>
     <script data-main="js/config" src="js/require.js"></script>    
-    
   </body>
 </html>

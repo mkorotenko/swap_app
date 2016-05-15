@@ -4,12 +4,17 @@ define(function (require) {
 
     var $                   = require('jquery'),
         Backbone            = require('backbone'),
+        TransactionCollection = require('app/view/transaction'),
 
         Account = Backbone.Model.extend({
-            defaults: {
-              title: '',
-              amount: 0
-            }
+          initialize: function(){
+            this.transactions = new TransactionCollection();
+          },
+          defaults: {
+            title: '',
+            amount: 0,
+            transactions: null
+          }
         }),
         AccountCollection = Backbone.Collection.extend({
           model: Account,
