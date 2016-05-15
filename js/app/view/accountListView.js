@@ -72,5 +72,4 @@ define(function (require) {
         }
 
     });
-
 });

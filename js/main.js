@@ -1,17 +1,18 @@
 define([
   'jquery',
   'underscore',
-  'backbone',
-   'view/listPage'
-], function($, _, Backbone, Pages){
+  'backbone'
+], function($, _, Backbone){
 
   //var router;
-  var pages = new Pages();
+  var pages;// = require('view/listPage');
   var Application = Backbone.Model.extend({
     start: function(){
     },
-    switchPage: function(page){
-      pages[page](arguments[1]);
+    switchPage: function(page,unitId){
+      require(['view/listPage'],function(pages){
+        pages[page](unitId);
+      });
     }
   });
 
