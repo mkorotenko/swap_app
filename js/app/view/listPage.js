@@ -28,9 +28,6 @@ define(function (require) {
     initialize: function () {
       this.collection.on("reset", this.render, this);
       this.collection.on("add", this.renderNew, this);
-      $('#app-container').html('<div id="account-list" class="data-table"></div>');
-      this.el = '#account-list';
-      this.$el = $(this.el);
       return this;
     },
     open: function(){
@@ -44,15 +41,16 @@ define(function (require) {
       return this;
     },
     render: function (hideSpinner) {
-      this.$el.html('');
-      this.$el.append($(header()).append('<header id="header" style="padding: 5px;">'+
+      var container = $('#app-container').html('');
+      container.append($(header()).append('<header id="header" style="padding: 5px;">'+
             '<h1><font color="red">A</font>ccounts</h1>'+
             '<input id="serach" placeholder="What needs to be done?">'+
             '<div id="current-path">'+
             '</div>'+
             '</header>'));
-      if(!hideSpinner) this.$el.append($(body()).append(spinner()));
-      else this.$el.append(body());
+      if(!hideSpinner) container.append($(body()).append(spinner()));
+      else container.append(body());
+      $('#data-container').html('<div id="account-list" class="data-table"></div>');
       return this;
     }
   });

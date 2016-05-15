@@ -39,14 +39,14 @@ define(function (require) {
     },
     renderNew: function(model) {
       var accountView = new AccountView({model: model});
-      $('#data-container').append(accountView.el);
+      $('#account-list').append(accountView.el);
       return this;
     },
     render: function () {
       this.constructor.__super__.render.apply(this,arguments);
       this.collection.each(function(item){
         var accountView = new AccountView({model: item});
-        this.$el.append(accountView.el);
+        $('#account-list').append(accountView.el);
       }, this);
       return this;
     }

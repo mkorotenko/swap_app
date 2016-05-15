@@ -17,12 +17,11 @@ define([
             collection: this[page+'List']
           });
           this.pageViewers[page] = view;
-          view.open(unitId);
-          view.update();
+          view.open(unitId).update();
         }.bind(this));
         return;
       }
-      this.pageViewers[page].open(unitId);
+      this.pageViewers[page].open(unitId).update();
     }
   });
 
