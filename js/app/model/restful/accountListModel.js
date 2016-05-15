@@ -4,7 +4,7 @@ define(function (require) {
 
     var $                   = require('jquery'),
         Backbone            = require('backbone'),
-        TransactionCollection = require('app/view/transaction'),
+        TransactionCollection = require('view/transaction'),
 
         Account = Backbone.Model.extend({
           initialize: function(){

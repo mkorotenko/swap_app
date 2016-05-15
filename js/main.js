@@ -2,7 +2,7 @@ define([
   'jquery',
   'underscore',
   'backbone',
-   'view/home'
+   'view/listPage'
 ], function($, _, Backbone, Pages){
 
   //var router;
