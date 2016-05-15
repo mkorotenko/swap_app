@@ -4,13 +4,12 @@ define(function (require) {
   var $                   = require('jquery'),
       _                   = require('underscore'),
       Backbone            = require('backbone'),
-      Accounts            = require('view/accounts'),
       header              = _.template(require('text!tpl/header.html')),
       body                = _.template(require('text!tpl/body.html')),
       spinner             = _.template(require('text!tpl/spinner.html'));
-  var accounts      = new Accounts({el: $('#data-container')});
+
   var ListPageView = Backbone.View.extend({
-    el: '#app-container',
+
     renderPath: function(path) {
       var currentPath = $('#current-path');
       currentPath.html('');
@@ -20,20 +19,24 @@ define(function (require) {
         currentPath.append('<a href="#card/'+path[i]+'">'+path[i]+'</a>');
       }
     },
-    accounts: function() {
-      this.render();
-      accounts.update();
-      this.renderPath([]);
+    busy: function(isBusy){
+      var blanket = $('.blanket-spinner','.content');
+      if(!isBusy) blanket.css('display','none');
+      else blanket.css('display','flex');
       return this;
     },
-    transactions: function(accountId) {
-      var account = accounts.collection.get(accountId);
-      if(!account){
-        this.pageNotFound();
-        return;
-      }
-      account.transactions.update();
-      this.renderPath([accountId]);
+    initialize: function () {
+      this.collection.on("reset", this.render, this);
+      this.collection.on("add", this.renderNew, this);
+      $('#app-container').html('<div id="account-list" class="data-table"></div>');
+      this.el = '#account-list';
+      this.$el = $(this.el);
+      return this;
+    },
+    open: function(){
+      this.render();
+      this.renderPath([]);
+      return this;
     },
     pageNotFound: function(){
       this.render(true);
@@ -54,7 +57,6 @@ define(function (require) {
     }
   });
 
-  // return new ListPageView();
   return ListPageView;
 
 });

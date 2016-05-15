@@ -1,27 +1,33 @@
 define([
   'jquery',
   'underscore',
-  'backbone'
-], function($, _, Backbone){
+  'backbone',
+  'app/model/account'
+], function($, _, Backbone, account){
 
   var Application = Backbone.Model.extend({
     pageViewers: {},
+    accountsList: account,
     start: function(){
     },
     switchPage: function(page,unitId){
       if(!this.pageViewers[page]){
-        require(['view/listPage'],function(ListPageView){
-          var view = this.pageViewers[page] = new ListPageView();
-          view[page](unitId);
+        require(['view/accountListView'],function(ListPageView){
+          var view = new ListPageView({
+            collection: this[page+'List']
+          });
+          this.pageViewers[page] = view;
+          view.open(unitId);
+          view.update();
         }.bind(this));
         return;
       }
-      this.pageViewers[page][page](unitId);
+      this.pageViewers[page].open(unitId);
     }
   });
 
   var application = new Application();
-  
+
   return application;
   
 });
