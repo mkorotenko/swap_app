@@ -17,24 +17,15 @@ define([
         'card/:account': 'transactions',
         'card/:account/:record': 'editTransaction'
       },
-      renderPath: function(path) {
-        var currentPath = $('#current-path');
-        currentPath.html('');
-        currentPath.append('<a href="#/">Account list</a>');
-        for(var i=0; i<path.length; i++){
-          currentPath.append('<span>/</span>');
-          currentPath.append('<a href="#/card/'+path[i]+'">'+path[i]+'</a>');
-        }
-      },
       accounts: function() {
         // pages.accounts();
-        app.switchPage('accounts');
-        this.renderPath([]);
+        app.switchPage('account');
+        // this.renderPath([]);
       },
       transactions: function(account) {
         // pages.transactions(account);
-        app.switchPage('transactions',account);
-        this.renderPath([account]);
+        app.switchPage('transaction',account);
+        // this.renderPath([account]);
       },
       editTransaction: function(account,record) {
         //pages.transactions(account);

@@ -1,22 +1,26 @@
 define([
   'jquery',
   'underscore',
-  'backbone',
-   'view/home'
-], function($, _, Backbone, Pages){
+  'backbone'
+], function($, _, Backbone){
 
-  //var router;
-  var pages = new Pages();
   var Application = Backbone.Model.extend({
     start: function(){
     },
-    switchPage: function(page){
-      pages[page](arguments[1]);
+    switchPage: function(page,unitId){
+      require(['view/'+page+'ListView','app/model/'+page],function(ListPageView,Collection){
+        var view = new ListPageView({
+          collection: new Collection()
+        });
+        view.open(unitId).update();
+      }.bind(this));
+      return;
     }
   });
 
   var application = new Application();
-  
+
   return application;
   
 });
+//this.url = 'http://swap.korotenko.me/swap_restful.php?action=transactions&category='+this.currentParent.get('id');
