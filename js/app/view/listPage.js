@@ -9,7 +9,7 @@ define(function (require) {
       body                = _.template(require('text!tpl/body.html')),
       spinner             = _.template(require('text!tpl/spinner.html'));
   var accounts      = new Accounts({el: $('#data-container')});
-  var PageView = Backbone.View.extend({
+  var ListPageView = Backbone.View.extend({
     el: '#app-container',
     renderPath: function(path) {
       var currentPath = $('#current-path');
@@ -54,6 +54,7 @@ define(function (require) {
     }
   });
 
-  return new PageView();
+  // return new ListPageView();
+  return ListPageView;
 
 });

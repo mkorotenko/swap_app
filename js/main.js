@@ -5,12 +5,18 @@ define([
 ], function($, _, Backbone){
 
   var Application = Backbone.Model.extend({
+    pageViewers: {},
     start: function(){
     },
     switchPage: function(page,unitId){
-      require(['view/listPage'],function(pages){
-        pages[page](unitId);
-      });
+      if(!this.pageViewers[page]){
+        require(['view/listPage'],function(ListPageView){
+          var view = this.pageViewers[page] = new ListPageView();
+          view[page](unitId);
+        }.bind(this));
+        return;
+      }
+      this.pageViewers[page][page](unitId);
     }
   });
 
