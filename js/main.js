@@ -4,8 +4,6 @@ define([
   'backbone'
 ], function($, _, Backbone){
 
-  //var router;
-  var pages;// = require('view/listPage');
   var Application = Backbone.Model.extend({
     start: function(){
     },
@@ -21,3 +19,4 @@ define([
   return application;
   
 });
+//this.url = 'http://swap.korotenko.me/swap_restful.php?action=transactions&category='+this.currentParent.get('id');

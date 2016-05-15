@@ -14,10 +14,10 @@ define(function (require) {
     renderPath: function(path) {
       var currentPath = $('#current-path');
       currentPath.html('');
-      currentPath.append('<a href="#/">Account list</a>');
+      currentPath.append('<a href="#">Account list</a>');
       for(var i=0; i<path.length; i++){
         currentPath.append('<span>/</span>');
-        currentPath.append('<a href="#/card/'+path[i]+'">'+path[i]+'</a>');
+        currentPath.append('<a href="#card/'+path[i]+'">'+path[i]+'</a>');
       }
     },
     accounts: function() {
