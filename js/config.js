@@ -35,16 +35,19 @@ require.config({
 
 require(['jquery', 'backbone', 'js/router', 'js/main'], function ($, Backbone, Router, application) {
 
-    Date.prototype.toSWAPDateString = function() {
+    Date.prototype.toSWAPDate = function() {
       var yyyy = this.getFullYear().toString(),
           mm = (this.getMonth()+1).toString(),
           dd  = this.getDate().toString();
       return yyyy+'-'+(mm[1]?mm:"0"+mm[0])+'-'+(dd[1]?dd:"0"+dd[0]);
     };
-    Date.prototype.toSWAPTimeString = function() {
+    Date.prototype.toSWAPTime = function() {
       var hh = this.getHours().toString(),
           mm = this.getMinutes().toString();
       return (hh[1]?hh:"0"+hh[0])+':'+(mm[1]?mm:"0"+mm[0]);
+    };
+    Date.prototype.toSWAPDateTime = function() {
+      return this.toSWAPDate()+' '+this.toSWAPTime();
     };
 
     router = new Router();
