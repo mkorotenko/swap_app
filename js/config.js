@@ -15,6 +15,7 @@ require.config({
       '*': {
           'app/model/account': 'app/model/restful/accountListModel',
           'app/model/transaction': 'app/model/restful/transactionListModel',
+          'app/model/transactionItem': 'app/model/memory/transactionItemModel',
           'view/accounts': 'app/view/accountListView',
           'view/transaction': 'app/view/transactionListView',
           'view/home': 'app/view/listPage',
@@ -34,11 +35,16 @@ require.config({
 
 require(['jquery', 'backbone', 'js/router', 'js/main'], function ($, Backbone, Router, application) {
 
-    Date.prototype.toString = function() {
+    Date.prototype.toSWAPDateString = function() {
       var yyyy = this.getFullYear().toString(),
           mm = (this.getMonth()+1).toString(),
           dd  = this.getDate().toString();
       return yyyy+'-'+(mm[1]?mm:"0"+mm[0])+'-'+(dd[1]?dd:"0"+dd[0]);
+    };
+    Date.prototype.toSWAPTimeString = function() {
+      var hh = this.getHours().toString(),
+          mm = this.getMinutes().toString();
+      return (hh[1]?hh:"0"+hh[0])+':'+(mm[1]?mm:"0"+mm[0]);
     };
 
     router = new Router();

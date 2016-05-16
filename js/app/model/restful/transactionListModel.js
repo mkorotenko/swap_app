@@ -4,18 +4,7 @@ define(function (require) {
   
   var $                   = require('jquery'),
       Backbone            = require('backbone'),
-      Transaction = Backbone.Model.extend({
-        initialize: function(){
-        },
-        defaults: {
-          id:     '',
-          date:   '',
-          category: '',
-          note:   '',
-          amount: 0,
-          left:   0
-        }
-      });
+      Transaction         = require('app/model/transactionItem');
 
   return Backbone.Collection.extend({
     initialize: function(){
