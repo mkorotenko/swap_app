@@ -9,8 +9,7 @@ define(function (require) {
         },
         defaults: {
           title: '',
-          amount: 0,
-          transactions: null
+          amount: 0
         }
       }),
       AccountCollection = Backbone.Collection.extend({

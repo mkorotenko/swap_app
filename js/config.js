@@ -14,7 +14,7 @@ require.config({
     map: {
       '*': {
           'app/model/account': 'app/model/restful/accountListModel',
-          'app/model/transaction': 'app/model/memory/transactionListModel',
+          'app/model/transaction': 'app/model/restful/transactionListModel',
           'view/accounts': 'app/view/accountListView',
           'view/transaction': 'app/view/transactionListView',
           'view/home': 'app/view/listPage',
