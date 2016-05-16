@@ -8,23 +8,22 @@ define(function (require) {
         initialize: function(){
         },
         defaults: {
-          // id:     '',
+          id:     '',
           date:   '',
           category: '',
           note:   '',
           amount: 0,
           left:   0
         }
-      }),
-      TransactionCollection = Backbone.Collection.extend({
-        initialize: function(){
-          this.url += this.category;
-        },
-        model: Transaction,
-        category: '',
-        url: 'http://swap.korotenko.me/swap_restful.php?action=transactions&category='
       });
-      
-  return TransactionCollection;
-  
+
+  return Backbone.Collection.extend({
+    initialize: function(){
+      this.url += this.category;
+    },
+    model: Transaction,
+    category: '',
+    url: 'http://swap.korotenko.me/swap_restful.php?action=transactions&category='
+  });
+
 });

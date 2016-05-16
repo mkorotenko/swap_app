@@ -11,12 +11,11 @@ define(function (require) {
           title: '',
           amount: 0
         }
-      }),
-      AccountCollection = Backbone.Collection.extend({
-        model: Account,
-        url: 'http://swap.korotenko.me/swap_restful.php?action=list'
       });
       
-  return AccountCollection;
-  
+  return Backbone.Collection.extend({
+    model: Account,
+    url: 'http://swap.korotenko.me/swap_restful.php?action=list'
+  });
+
 });
