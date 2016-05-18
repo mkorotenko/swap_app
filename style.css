@@ -263,7 +263,7 @@ th, td {
 .table-box.value-text{
   text-align: left;
   padding: 7px 0 7px 10px;
-  width: 15em;
+  /*width: 15em;*/
 }
 .table-box.value-number{
   text-align: right;
