@@ -9,15 +9,17 @@ define(function (require) {
       spinner             = _.template(require('text!tpl/spinner.html'));
 
   var ListPageView = Backbone.View.extend({
-
-    renderPath: function(path) {
-      var currentPath = $('#current-path');
+    options: {path: []},
+    renderPath: function() {
+      var currentPath = $('#current-path'),
+          path = this.path || this.options.path || [];
       currentPath.html('');
       currentPath.append('<a href="#">Account list</a>');
       for(var i=0; i<path.length; i++){
         currentPath.append('<span>/</span>');
         currentPath.append('<a href="#card/'+path[i]+'">'+path[i]+'</a>');
       }
+      return this;
     },
     update: function() {
       if(!this.collection.length){
@@ -50,7 +52,7 @@ define(function (require) {
     },
     open: function(){
       this.render();
-      this.renderPath([]);
+      this.renderPath();
       return this;
     },
     pageNotFound: function(){
