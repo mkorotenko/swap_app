@@ -12,12 +12,14 @@ define(function (require) {
     options: {path: []},
     renderPath: function() {
       var currentPath = $('#current-path'),
+          pathStr = '',
           path = this.path || this.options.path || [];
       currentPath.html('');
       currentPath.append('<a href="#">Account list</a>');
       for(var i=0; i<path.length; i++){
         currentPath.append('<span>/</span>');
-        currentPath.append('<a href="#card/'+path[i]+'">'+path[i]+'</a>');
+        pathStr += '/'+path[i];
+        currentPath.append('<a href="#card'+pathStr+'">'+path[i]+'</a>');
       }
       return this;
     },
