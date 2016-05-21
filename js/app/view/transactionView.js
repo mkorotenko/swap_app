@@ -18,6 +18,7 @@ define(function (require) {
     },
     open: function() {
       this.render();
+      this.renderPath();
       return this;
     },
     update: function() {
