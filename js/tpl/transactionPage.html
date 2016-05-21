@@ -1,0 +1,41 @@
+<div class="l_row">
+  <label class="clabel">				
+    <span class="prop_name">User:</span>
+    <select class="prop_value" name="User">
+      <option value="USD">USD</option>
+      <option value="Max" selected="">Max</option>
+      <option value="Margo">Margo</option>
+      <option value="RUB">RUB</option>
+      <option value="Renata">Renata</option>
+      <option value="Margo card">Margo card</option>
+      <option value="Raiffaisen">Raiffaisen</option>
+    </select>
+	</label>
+</div>
+<div class="l_row">
+  <label class="clabel">
+	  <span class="prop_name">Date:</span>
+		<input class="prop_value" name="Date" type="date" value="<%- (new Date(date)).toSWAPDate() %>">
+	</label>
+  <label class="clabel">
+	  <input class="prop_value" name="Time" type="time" value="<%- (new Date(date)).toSWAPTime() %>">
+	</label>
+</div>
+<div class="l_row">
+  <label class="clabel">
+	  <span class="prop_name">Text:</span>
+		<input class="prop_value" name="Text" type="text" value="<%- note %>">
+	</label>
+</div>
+<div class="l_row">
+  <label class="clabel">
+    <span class="prop_name">Amount:</span>
+    <input type="text" id="opertion" name="Operation" value="+" style="display:none;" hidden="">
+    <input style="width:3em;" type="button" value="+" onclick="this.value=this.value=='-'? '+':'-';getElementById('opertion').value=this.value;">
+    <input class="prop_value" name="Amount" autofocus="" type="number" pattern="[0-9,\.]*" step="0.01" min="0" value="<%- amount %>">
+	</label>
+</div>
+<div class="l_row">
+  <input type="submit" value="Ok" onclick="window.history.back()">
+  <input type="button" value="Cancel" onclick="window.history.back()">
+</div>

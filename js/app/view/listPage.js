@@ -58,6 +58,9 @@ define(function (require) {
       $('#data-container').html('Page not found');
       return this;
     },
+    renderNew: function() {
+      return this;
+    },
     render: function (hideSpinner) {
       var container = $('#app-container').html('');
       container.append($(header()).append('<header id="header" style="padding: 5px;">'+
