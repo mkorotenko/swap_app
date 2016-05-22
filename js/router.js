@@ -18,12 +18,12 @@ define([
         app.switchPage('account');
       },
       transactions: function(account) {
-        app.switchPage('transaction',account);
+        app.switchPage('transaction', account);
       },
       editTransaction: function(account,record) {
-        console.log('Path: account '+account+' / record '+record);
+        // console.log('Path: account '+account+' / record '+record);
         var currentModel = app.currentCollection.get(record);
-        app.editPage('transaction',currentModel);
+        app.editPage('transaction', currentModel);
       }
         // setFilter: function(params) {
         //   console.log('app.router.params = ' + params);
