@@ -7,6 +7,7 @@ define([
 ], function($, _, Backbone, application){
 
     "use strict";
+
   var app = application,
       AppRouter = Backbone.Router.extend({
       routes: {
