@@ -1,8 +1,11 @@
 define([
   'jquery',
   'underscore',
-  'backbone'
-], function($, _, Backbone){
+  'backbone',
+  'model/memory/lookupManager'
+], function($, _, Backbone, LookupCollection){
+  
+  var manager = new LookupCollection();
 
   var Application = Backbone.Model.extend({
     start: function(){},
@@ -10,7 +13,8 @@ define([
     currentCollection: {},
     switchPage: function(page,unitId){
       require(['view/'+page+'ListView','app/model/'+page],function(ListPageView,Collection){
-        this.currentCollection = new (Collection.extend({category:unitId}))();
+        var lookup = manager.getCreate(page,unitId);
+        this.currentCollection = lookup.collection;//new (Collection.extend({category:unitId}))();
         var view = new ListPageView({
           collection: this.currentCollection,
           path:(unitId? [unitId]:[])
