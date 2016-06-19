@@ -22,15 +22,14 @@ define([
         app.switchPage('transaction', account);
       },
       editTransaction: function(account,record) {
-        // console.log('Path: account '+account+' / record '+record);
         var currentModel = app.currentCollection.get(record);
         app.editPage('transaction', currentModel);
       }
-        // setFilter: function(params) {
-        //   console.log('app.router.params = ' + params);
-        //   window.filter = params.trim() || '';
-        //   app.accList.trigger('reset');
-        // },
+      // setFilter: function(params) {
+      //   console.log('app.router.params = ' + params);
+      //   window.filter = params.trim() || '';
+      //   app.accList.trigger('reset');
+      // },
     });
 
   return AppRouter;

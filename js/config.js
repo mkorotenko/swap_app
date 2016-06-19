@@ -52,6 +52,6 @@ require(['jquery', 'backbone', 'js/router', 'js/main'], function ($, Backbone, R
 
     router = new Router();
     Backbone.history.start();
-    application.start();
+    // application.start();
 
 });
