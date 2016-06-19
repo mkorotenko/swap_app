@@ -9,7 +9,7 @@ define(function (require) {
       body                = _.template(require('text!tpl/body.html')),
       spinner             = _.template(require('text!tpl/spinner.html'));
 
-  var ListPageView = Backbone.View.extend({
+  var ApplicationView = Backbone.View.extend({
     options: {path: []},
     renderPath: function() {
       var currentPath = $('#current-path'),
