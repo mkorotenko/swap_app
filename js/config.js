@@ -33,7 +33,7 @@ require.config({
     }
 });
 
-require(['jquery', 'backbone', 'js/router', 'js/main'], function ($, Backbone, Router, application) {
+require(['jquery', 'backbone', 'js/router', 'js/main'], function ($, Backbone, Router) {
 
     Date.prototype.toSWAPDate = function() {
       var yyyy = this.getFullYear().toString(),
