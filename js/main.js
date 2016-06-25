@@ -1,42 +1,54 @@
 define([
   'jquery',
   'underscore',
-  'backbone',
-  'model/memory/lookupManager'
-], function($, _, Backbone, LookupCollection){
+  'backbone'
+], function($, _, Backbone){
   
-  var manager = new LookupCollection();
-
+  var MainPage = Backbone.View.extend({
+    el: '#app-container',
+    head: _.template($('#tmpl_head').html()),
+    navBar: _.template($('#tmpl_nav').html()),
+    searchBar: _.template($('#tmpl_search_bar').html()),
+    render: function() {
+      this.$el.html(
+        this.head(this.model.attributes) +
+        this.navBar(this.model) +
+        this.searchBar()
+      );
+      return this;
+    }
+  });
+  
   var Application = Backbone.Model.extend({
-    entitySchema: 'applicationView',
     path: [],
-    currentCollection: {},
+    menu: [
+        {
+          name: 'Accounts',
+          selected: true
+        },
+        {
+          name: 'Transactions',
+          selected: false
+        },
+        {
+          name: 'Repots',
+          selected: false
+        }
+      ],
     initialize: function() {
-      console.log('Application started');
-      return this;
-    },
-    switchPage: function(page,unitId){
-      require(['view/'+page+'ListView','app/model/'+page],function(ListPageView,Collection){
-        var lookup = manager.getCreate(page,unitId);
-        this.currentCollection = lookup.collection;//new (Collection.extend({category:unitId}))();
-        var view = new ListPageView({
-          collection: this.currentCollection,
-          path:(unitId? [unitId]:[])
-        });
-        view.open(unitId).update();
-      }.bind(this));
-      return this;
-    },
-    editPage: function(page,entity){
-      require(['view/'+page+'View'],function(ModelPageView){
-        var view = new ModelPageView({model: entity, path: [entity.get('category'),entity.get('id')]});
-        view.open(entity).update();
-      }.bind(this));
+      this.on('change:page', function(app, page){ 
+        console.log(page);
+        this.mainPage.render();
+      });
       return this;
     }
   });
 
   var application = new Application();
+  
+  application.mainPage = new MainPage({
+    model: application
+  });
 
   return application;
   

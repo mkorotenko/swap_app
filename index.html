@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <!--HTML5 doctype-->
 <html>
-
 <head>
-
     <title>Single View Template</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
@@ -12,17 +10,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline'; object-src 'self'">
 
-<!--    <link rel="stylesheet" type="text/css" href="lib/appframework/icons.css" />-->
-<!--    <link rel="stylesheet" type="text/css" href="lib/appframework/af.ui.css" />-->
-    <link href="style.css" type="text/css" rel="stylesheet">
-    <!--<link href="flex.css" type="text/css" rel="stylesheet">-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css" type="text/css">
 
-<!--    <script type="text/javascript" charset="utf-8" src="lib/jquery.min.js"></script>-->
     <script type="text/javascript" charset="utf-8" src="js/lib/fastclick.min.js"></script>
 <!--    <script type="text/javascript" charset="utf-8" src="lib/appframework/appframework.ui.min.js"></script>-->
         
     <script src='cordova.js'></script>
-
 </head>
 
 <body>
@@ -56,10 +50,9 @@
   <script type="underscore/template" id="tmpl_nav">
     <nav>
 			<ul>
-				<li>All</li>
-				<li>Athletes (0)<span class="selected"></span></li>
-				<li>Fans</li>
-				<li>Teams</li>
+			  <% _.each(menu, function(menu, index) {%>
+  				<li><%= menu.name %><%	if(menu.selected) {%> <span class="selected"></span> <%}%></li>
+			  <%})%>
 			</ul>
 		</nav>
 	</script>
@@ -74,8 +67,7 @@
 		</div>
 	</script>
 
-  <div id="app-container">
-  </div>
+  <div id="app-container"></div>
 
   <script data-main="js/config" src="js/require.js"></script>
 

@@ -4,32 +4,21 @@ define([
   'underscore',
   'backbone',
    'js/main'
-], function($, _, Backbone, application){
+], function($, _, Backbone, app){
 
     "use strict";
 
-  var app = application,
-      AppRouter = Backbone.Router.extend({
+  var AppRouter = Backbone.Router.extend({
       routes: {
         '' : 'accounts',
-        'card/:account': 'transactions',
-        'card/:account/:record': 'editTransaction'
+        'card/:account': 'transactions'
       },
       accounts: function() {
-        app.switchPage('account');
+        app.set('page','accounts');
       },
       transactions: function(account) {
-        app.switchPage('transaction', account);
-      },
-      editTransaction: function(account,record) {
-        var currentModel = app.currentCollection.get(record);
-        app.editPage('transaction', currentModel);
+        app.set('page','transactions');
       }
-      // setFilter: function(params) {
-      //   console.log('app.router.params = ' + params);
-      //   window.filter = params.trim() || '';
-      //   app.accList.trigger('reset');
-      // },
     });
 
   return AppRouter;
